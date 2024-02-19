@@ -6,3 +6,5 @@ drf-yasg
 redis
 celery[redis]
 zaproxy
+django-filter
+coverage

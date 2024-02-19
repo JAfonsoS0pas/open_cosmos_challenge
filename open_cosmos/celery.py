@@ -18,7 +18,7 @@ app.autodiscover_tasks()
 # Use Redis as the Celery Beat result backend
 app.conf.beat_schedule = {
     'update-scheduled-scans': {
-        'task': 'scheduller.tasks.update_scheduled_scans',
+        'task': 'business.tasks.consumer',
         'schedule': crontab(),  # Run every minute
     },
 }

@@ -29,22 +29,11 @@ services:
     ports:
       - "6379:6379"
 
-  celery-consumer:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /bin/bash -c "celery -A cybertrust worker -l info"
-    volumes:
-      - .:/app
-    depends_on:
-      - web
-      - redis
-
   celery-worker:
     build:
       context: .
       dockerfile: Dockerfile
-    entrypoint: /bin/bash -c "celery -A cybertrust worker -l info"
+    entrypoint: /bin/bash -c "celery -A open_cosmos worker -l info"
     volumes:
       - .:/app
     depends_on:
@@ -55,7 +44,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    entrypoint: /bin/bash -c "celery -A cybertrust beat -l info"
+    entrypoint: /bin/bash -c "celery -A open_cosmos beat -l info"
     #entrypoint: /bin/bash -c "tail -f /dev/null"
     volumes:
       - .:/app

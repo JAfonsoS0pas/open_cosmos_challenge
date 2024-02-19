@@ -2,15 +2,25 @@
 
 ## Introduction
 
-You will need to build a service which can store, parse and offer access to data points received from an external source.
+This is my solution to the DataCosmos backend challange in this README you can find how to setup the project, how to test it for yourself and some final considerations
 
-We expect you to spend around 10 hours total on this project.
+## Setup
 
-Candidates are free to use any available open-source software as long as its license allows free commercial use.
+This project is completely dockerized to run it simply
+1. **Clone the repository:**
 
-There is no restriction about the environment the binary must run in.
-
-There code must be written in Python.
+   ```bash
+   git clone git clone git@github.com:JAfonsoS0pas/open_cosmos_challenge.git
+   cd yourproject
+   ```
+2. **Build and run the Docker containers:**
+   ```bash
+   docker-compose up -d --build
+   ```
+3. **Create a superuser:**
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
 
 ## Objective
 
@@ -22,52 +32,6 @@ Create a service which can
 - allow access to the stored data from the service with some filters described below - there are no requirements around the method of access, you may choose
 
 Create a solution that you consider as close to production-ready as possible. Focus on quality rather than quantity.
-
-## Running the Data Server
-
-The command
-
-```
-./data-server --port 28462
-```
-
-will start the server listening (insecurely, i.e. no TLS) for `GET` requests on port `28462`.
-
-Each `GET` request will return either
-
-- a 200 response containing a single data point, whose format is given below
-- a 404 response if no data point is currently available
-
-## Data Format
-
-### From Data Server
-
-Each successful "message" from the server contains JSON data in the format
-
-```
-{
-    "time": int         // UNIX timestamp in seconds
-    "value": []number   // the data value, byte encoded
-    "tags": []string    // a set of tags associated with the value
-}
-```
-
-The value is a little-endian byte encoding of a float32.
-
-## When Accessed From Service
-
-Users who will access data from the service require those data to be provided in the format, 
-and include at least as much information, as follows
-
-```
-[
-    {
-        "time": string     // ISO8601 timestamp
-        "value": number    // the data value
-    },
-    // ...
-]
-```
 
 ## Business Rules
 
@@ -90,10 +54,26 @@ In other words, users must be able to access
 - data points generated before a certain datetime
 - data points generated within a set datetime range
 
-## Expected output
+## The API
+    You can find the API by going to localhost:8000/api/ and from there you can use the rest_framework interface to explore it.
+    As an alternative by going to localhost:8000/swagger/ you can find all the available endpoints and filters. These endpoints complete all simple data retrival requirements, to find all data points within a certain range of time simply use a combination of the available filter, for example:
+    ```http
+    values/?timestamp__gte=2024-02-19T10:00:00&timestamp__lte=2024-02-19T11:00:00
+    ```
 
-Candidates are expected to: 
+## Final Consideration
 
-- Provide the source code (link to a public repository or packed into some kind of archive)
-- Include clear instructions on how to execute this code
-- Prepare a short presentation (~10-20 minutes) about the solution used, the approach taken, the main challenges and next steps
+Along with the base project you can find some tests created to ensure some quality of the produced code. Tu run these tests follow these steps:
+1. **Access the Django container:**
+
+   ```bash
+   docker-compose exec web bash
+   ```
+2. **Inside the container run the tests:**
+   ```bash
+   coverage run manage.py test
+   ```
+3. **Check Coverage (optional):**
+   ```bash
+   coverage report
+   ```
