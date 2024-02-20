@@ -20,7 +20,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'update-scheduled-scans': {
         'task': 'business.tasks.consumer',
-        #'schedule': crontab(),  # Run every minute
-        'schedule': timedelta(seconds=5),  # Run every 5 seconds
+        'schedule': crontab(),  # Run every minute
+        #'schedule': timedelta(seconds=5),  # Run every 5 seconds
     },
 }

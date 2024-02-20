@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'open_cosmos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # Replace with your actual database name
-        'USER': 'postgres',  # Replace with your actual database user
-        'PASSWORD': 'postgres',  # Replace with your actual database password
-        'HOST': 'db',  # Replace with your actual database host
-        'PORT': '5432',  # Replace with your actual database port
+        'NAME': os.environ.get('DB_NAME','postgres'),  # Replace with your actual database name
+        'USER': os.environ.get('DB_USER','postgres'),  # Replace with your actual database user
+        'PASSWORD': os.environ.get('DB_PASSWORD','postgres'),  # Replace with your actual database password
+        'HOST': os.environ.get('DB_HOST','db'),  # Replace with your actual database host
+        'PORT': os.environ.get('DB_PORT','5432'),  # Replace with your actual database port
     }
 }
 
@@ -127,17 +127,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
-# # Celery Beat settings
-# CELERY_BEAT_SCHEDULE = {
-#     'consumer_task_every_minute': {
-#         'task': 'open_cosmos.tasks.consumer_task',  # Replace with your actual task
-#         'schedule': 60.0,  # Run every minute (60 seconds)
-#     },
-#     'worker_task_every_minute': {
-#         'task': 'open_cosmos.tasks.worker_task',  # Replace with your actual task
-#         'schedule': 60.0,  # Run every minute (60 seconds)
-#     },
-# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

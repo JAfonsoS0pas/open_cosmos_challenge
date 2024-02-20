@@ -40,18 +40,6 @@ services:
       - web
       - redis
 
-  celery-beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /bin/bash -c "celery -A open_cosmos beat -l info"
-    #entrypoint: /bin/bash -c "tail -f /dev/null"
-    volumes:
-      - .:/app
-    depends_on:
-      - celery-worker
-      - redis
-
   data_server:
     build:
       context: .
