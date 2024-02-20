@@ -62,9 +62,9 @@ In other words, users must be able to access
  You can find the API by going to localhost:8000/api/ and from there you can use the rest_framework interface to explore it.
  As an alternative by going to localhost:8000/swagger/ you can find all the available endpoints and filters. These endpoints complete all simple data retrieval requirements, to find all data points within a certain range of time simply use a combination of the available filter, for example:
     
-    ```http
-    values/?timestamp__gte=2024-02-19T10:00:00&timestamp__lte=2024-02-19T11:00:00
-    ```
+ ```http
+ values/?timestamp__gte=2024-02-19T10:00:00&timestamp__lte=2024-02-19T11:00:00
+ ```
 
 ## Final Consideration
 
