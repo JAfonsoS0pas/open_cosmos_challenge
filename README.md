@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is my solution to the DataCosmos backend challange in this README you can find how to setup the project, how to test it for yourself and some final considerations
+This is my solution to the DataCosmos backend challenge in this README you can find how to set up the project, how to test it for yourself and some final considerations
 
 ## Setup
 
@@ -60,7 +60,7 @@ In other words, users must be able to access
 
 ## The API
     You can find the API by going to localhost:8000/api/ and from there you can use the rest_framework interface to explore it.
-    As an alternative by going to localhost:8000/swagger/ you can find all the available endpoints and filters. These endpoints complete all simple data retrival requirements, to find all data points within a certain range of time simply use a combination of the available filter, for example:
+    As an alternative by going to localhost:8000/swagger/ you can find all the available endpoints and filters. These endpoints complete all simple data retrieval requirements, to find all data points within a certain range of time simply use a combination of the available filter, for example:
     ```http
     values/?timestamp__gte=2024-02-19T10:00:00&timestamp__lte=2024-02-19T11:00:00
     ```
@@ -83,3 +83,5 @@ Along with the base project you can find some tests created to ensure some quali
    ```bash
    coverage report
    ```
+
+At the moment of delivery a coverage of 98% was ensured.
