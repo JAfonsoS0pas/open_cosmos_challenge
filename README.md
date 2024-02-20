@@ -17,7 +17,11 @@ This project is completely dockerized to run it simply
    ```bash
    docker-compose up -d --build
    ```
-3. **Create a superuser:**
+3. **Run Migrations:**
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
+4. **Create a superuser:**
    ```bash
    docker-compose exec web python manage.py createsuperuser
    ```
@@ -62,6 +66,8 @@ In other words, users must be able to access
     ```
 
 ## Final Consideration
+
+To fulfill the requirement that stated that discard data could be evaluated by a user such as an administrator there are two ways, firstly you can check the docker logs for the worker that output a warning every time data is marked as discarded, however since this process is not very user friendly another aproach was added, data that is marked as to be deleted is also stored in the database, this data can be reviewed and deleted in the admin dashboard (localhost:8000/admin) by the admin user.
 
 Along with the base project you can find some tests created to ensure some quality of the produced code. Tu run these tests follow these steps:
 1. **Access the Django container:**
